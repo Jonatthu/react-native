@@ -13,13 +13,13 @@ import {
 import { ReactElement, ReactNode, useCallback, useRef, useState } from 'react';
 import {
   Platform,
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SET_CURRENT_STORY } from 'storybook/internal/core-events';
 import { addons } from 'storybook/internal/manager-api';
 import { type API_IndexHash } from 'storybook/internal/types';
@@ -173,7 +173,7 @@ export const Layout = ({
   }, []);
 
   return (
-    <SafeAreaView style={containerStyle}>
+    <SafeAreaProvider style={containerStyle}>
       {isDesktop ? (
         <View style={desktopSidebarStyle}>
           {desktopSidebarOpen ? (
@@ -278,7 +278,7 @@ export const Layout = ({
       )}
 
       {isDesktop ? null : <MobileAddonsPanel ref={addonPanelRef} storyId={story?.id} />}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
